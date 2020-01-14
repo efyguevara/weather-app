@@ -7,13 +7,14 @@ function App() {
   return (
     <>
       <div className="App">
-        <header className="App-header"> 
-          <Weather/>
-        </header> 
-       
+        <header className="">
+          <img src="https://dojiw2m9tvv09.cloudfront.net/4/8/img-logos-logo-bsale-naranjo-mobile.png?1116"
+            srcset="https://dojiw2m9tvv09.cloudfront.net/4/8/img-logos-logo-bsale-naranjo.png?1116" alt="Logo de Bsale"></img>
+        </header>
+        <Weather />
       </div>
-    </>  
-    );
+    </>
+  );
 }
 
 export default App;
