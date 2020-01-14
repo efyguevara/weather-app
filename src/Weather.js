@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { InputGroup, Button, Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 
 function Weather() {
@@ -23,14 +23,31 @@ function Weather() {
   return (
     <>
       <Container>
+        <Row>
+          <Col>
+            <h1>{data.name}</h1>
+          </Col>
+          
+          <Col>
+            <h1>{ data.main ? Math.round(data.main.temp) : null }°</h1>
+            <p>{ data.weather ? data.weather[0].description : null }</p>
+
+          </Col>
+        </Row>
         <div>
-          <h2>{data.name}</h2>
-          <h2>{ data.main ? data.main.temp : null }°</h2>
-        </div>
-        <div>
-          <p>Sensación Térmica: { data.main ? data.main.feels_like : null }°</p>
-          <p>Mínima hoy: { data.main ? data.main.temp_min : null }°</p>
-          <p>Máxima hoy: { data.main ? data.main.temp_max : null }°</p>
+          <p>Sensación Térmica: { data.main ? Math.round(data.main.feels_like) : null }°</p>
+          <Row>
+            <Col>
+              <p>Mín: { data.main ? Math.round(data.main.temp_min) : null }°</p>
+            </Col>
+            <Col>
+              <p>Máx: { data.main ? Math.round(data.main.temp_max) : null }°</p>
+            </Col>
+          </Row>
+          <p>Velocidad el viento: { data.wind ? data.wind.speed : null }km/h</p>
+          {/* <p>Visibilidad: { data.visibility ? data.visibility : null }km</p> */}
+          <p>Nubosidad: { data.clouds ? data.clouds.all : null }%</p>
+
           <p>Humedad: { data.main ? data.main.humidity : null }%</p>
         </div>
       </Container>
@@ -39,3 +56,13 @@ function Weather() {
 }
 
 export default Weather;
+
+  // *****Información de la ciudad*****
+  // {
+  //   "id": 3646738,
+  //   "name": "Caracas",
+  //   "country": "VE",
+  //   "coord": {
+  //     "lon": -66.879189,
+  //     "lat": 10.48801
+  //   }
