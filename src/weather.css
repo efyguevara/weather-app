@@ -1,0 +1,25 @@
+.weather-style {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: justify;
+  font-size: calc(10px + 2vmin);
+  text-align: justify;
+
+}
+
+.cold {
+  background-color: #bbbbff6e;
+  color: #1b1b1b;
+}
+
+.normal {
+  background-color: #27b8278a;
+  color: #1b1b1b;
+}
+
+.hot {
+  background-color: #e6610875;
+  color: #1b1b1b;
+}
