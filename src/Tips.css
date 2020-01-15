@@ -1,0 +1,20 @@
+#tips {
+  color: #1b1b1b;
+  border-radius: .75em;
+  margin: .5em;
+  padding: .75em;
+  box-sizing: content-box;
+  min-height: 100%;
+}
+
+.cold {
+  background-color: #bbbbff6e;
+}
+
+.normal {
+  background-color: #27b8278a;
+}
+
+.heat {
+  background-color: #e6610875;
+}
