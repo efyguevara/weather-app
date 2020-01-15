@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './weather.css';
 import { Container, Row, Col } from 'react-bootstrap';
-
+import Tips from './Tips';
 
 function Weather() {
   const [data, setData] = useState({});
@@ -12,7 +12,6 @@ function Weather() {
     const resp = await fetch(`https://api.openweathermap.org/data/2.5/weather?id=${caracasCityId}&units=metric&lang=es&appid=${apiKey}`)
     resp.json()
       .then((res) => {
-        backgroundTemp(res.main.temp);
         setData(res)
       })
   }
@@ -25,73 +24,54 @@ function Weather() {
     return data ? Math.round(data[attr]).toString() + indicator : 'No Disponible';
   };
 
-  function firstLetterMay(string) {
+  const firstLetterMay = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  function backgroundTemp(temp) {
-    const bodyBg = document.getElementById('boddy');
-
-    if (temp <= 10) {
-      bodyBg.classList.add("cold");
-    }
-    if (temp >= 11 && temp <= 20) {
-      bodyBg.classList.add("normal");
-    }
-    if (temp >= 21 && temp <= 30) {
-      bodyBg.classList.add("hot");
-    }
-  }
+  const temperature = data.main ? data.main.temp : null;
 
   return (
     <>
       <Container className="weather-style">
         <Row>
-          <Col>
-            <h1>{data ? data.name : 'No disponible'}</h1>
+          <Col sm={12} className="text-center">
+            <h2>{data ? data.name : 'No disponible'}</h2>
           </Col>
-        </Row>
 
-        <Row>
-          <Col>
+          <Col sm={12} className="text-center">
             <h1>{getData(data.main, 'temp', '°')}</h1>
           </Col>
-        </Row>
-        <Row>
-          <Col>
+
+          <Col sm={12} className="text-center">
             <p>{data.weather ? firstLetterMay(data.weather[0].description) : 'No disponible'}</p>
           </Col>
-        </Row>
 
-        <Row>
-          <Col>
+          <Col sm={12} className="text-center">
             <p>Sensación Térmica: {getData(data.main, 'feels_like', '°')}</p>
           </Col>
-        </Row>
 
-        <Row>
-          <Col>
+          <Col sm={12} className="text-center">
             <p>Mín: {getData(data.main, 'temp_min', '°')} / Máx: {getData(data.main, 'temp_max', '°')}</p>
           </Col>
         </Row>
 
-        <Row>
-          <Col>
-            <p>Viento: {getData(data.wind, 'speed', 'km/h')}</p>
+        <Row >
+          <Col sm={12} md={6}>
+            <div className="bg2">
+              <p>Viento: {getData(data.wind, 'speed', 'km/h')}</p>
+              <p>Visibilidad: {data.visibility ? data.visibility / 1000 + 'km' : 'No Disponible'}</p>
+              <p>Nubosidad: {getData(data.clouds, 'all', '%')}</p>
+              <p>Humedad: {getData(data.main, 'humidity', '%')}</p>
+            </div>
           </Col>
 
-          <Col sm>
-            <p>Visibilidad: {data.visibility ? data.visibility / 1000 + 'km' : 'No Disponible'}</p>
-          </Col>
-
-          <Col sm>
-            <p>Nubosidad: {getData(data.clouds, 'all', '%')}</p>
-          </Col>
-
-          <Col sm>
-            <p>Humedad: {getData(data.main, 'humidity', '%')}</p>
+          <Col Col sm={12} md={6}>
+            <div id="tips">
+              <Tips temp={temperature} />
+            </div>
           </Col>
         </Row>
+
       </Container>
     </>
   );
